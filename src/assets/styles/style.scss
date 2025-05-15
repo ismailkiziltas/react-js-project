@@ -1,0 +1,10 @@
+@import "./_variables";
+@import "./_mixins";
+@import "./_base";
+
+// Main styles for the application
+body {
+    font-family: $font-stack;
+    background-color: $background-color;
+    color: $text-color;
+}
