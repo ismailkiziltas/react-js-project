@@ -7,6 +7,13 @@
     justify-content: space-between;
     padding: 20px;
 
+    .user {
+        font-size: 100px;
+        display: block;
+        margin: 20px auto 50px auto;
+        color: rgb(102, 232, 255);
+    }
+
     .log-out {
         background-color: #e74c3c;
         color: #fff;
