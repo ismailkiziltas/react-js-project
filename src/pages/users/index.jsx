@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "./_users.scss";
 import Table from "../../components/table";
 
@@ -12,12 +12,22 @@ const Users = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  const token = import.meta.env.VITE_API_TOKEN;
+
   useEffect(() => {
-    fetch("https://jsonplaceholder.typicode.com/users")
+    fetch("http://45.94.4.223:8080/api/v1/admin/user", {
+      method: "GET", // veya "POST", "PUT", "DELETE"
+      headers: {
+        "Content-Type": "application/json",
+        Authorization:
+          "Bearer " + token, 
+      },
+    })
       .then((res) => res.json())
       .then((users) => {
         const mapped = users.map((user) => ({
-          name: user.name,
+          id: user.id,
+          name: user.username,
           age: Math.floor(Math.random() * 30) + 20,
           email: user.email,
         }));
