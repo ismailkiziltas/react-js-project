@@ -4,38 +4,33 @@ import Table from "../../components/table";
 
 const Users = () => {
   const columns = [
-    { key: "name", label: "Ad" },
-    { key: "age", label: "Yaş" },
+    { key: "username", label: "Ad" },
+    { key: "birthday", label: "Yaş" },
     { key: "email", label: "E-posta" },
+    { key: "gender", label: "Cinsiyet" },
   ];
 
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const token = import.meta.env.VITE_API_TOKEN;
+  const url = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
-    fetch("http://45.94.4.223:8080/api/v1/admin/user", {
-      method: "GET", // veya "POST", "PUT", "DELETE"
+    fetch(`${url}/api/v1/admin/user`, {
+      method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Authorization:
-          "Bearer " + token, 
+        Authorization: "Bearer " + token,
       },
     })
       .then((res) => res.json())
       .then((users) => {
-        const mapped = users.map((user) => ({
-          id: user.id,
-          name: user.username,
-          age: Math.floor(Math.random() * 30) + 20,
-          email: user.email,
-        }));
-        setData(mapped);
+        setData(users);
         setLoading(false);
       })
       .catch(() => setLoading(false));
-  }, []);
+  }, [token, url]);
 
   return (
     <div>
